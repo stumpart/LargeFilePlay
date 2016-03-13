@@ -13,16 +13,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public class FileProcessorDriver {
-	
-	private static final int SCHEDULERS_COUNT = 30;
-	private static final int QUEUE_TOTAL = 30;
 
-	public static void main(String[] args) throws InterruptedException {
+    private static final int SCHEDULERS_COUNT = 30;
+    private static final int QUEUE_TOTAL = 30;
+
+    public static void main(String[] args) throws InterruptedException {
         Instant startTime  = Instant.now();
         ArrayBlockingQueue<String> ab = new ArrayBlockingQueue<>(QUEUE_TOTAL);
-		ScheduledExecutorService e2 = Executors.newScheduledThreadPool(QUEUE_TOTAL, new WorkerThreadFactory());
-		ExecutorService e1 = Executors.newFixedThreadPool(1, new WorkerThreadFactory());
-		AtomicInteger counter = new AtomicInteger(0);
+        ScheduledExecutorService e2 = Executors.newScheduledThreadPool(QUEUE_TOTAL, new WorkerThreadFactory());
+        ExecutorService e1 = Executors.newFixedThreadPool(1, new WorkerThreadFactory());
+        AtomicInteger counter = new AtomicInteger(0);
         CountDownLatch countDownLatch = new CountDownLatch(1);
 
         if(args.length > 0){
@@ -45,7 +45,7 @@ public class FileProcessorDriver {
         }else{
            System.out.println("No File provided");
         }
-	}
+    }
 
     public static void memoryPools(){
         String systemUsage = "";

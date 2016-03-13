@@ -1,5 +1,6 @@
 package concurrency.fileprocessing;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,25 +28,22 @@ public class InjestionWorker implements Runnable{
 
     @Override
     public void run(){
-        try{
+
             try(Stream<String> lines = Files.lines(filePath, StandardCharsets.UTF_8)){
                 lines.onClose(() -> {
-                    while(!queue.isEmpty()){
-                        //Waiting on queue to be empty
-                    }
-                    System.out.println("Done .....");
+                    while(!queue.isEmpty()){/*Waiting on queue to be empty*/}
                     countDownLatch.countDown();
                     consumerScheduler.shutdownNow();
                 }).forEach((l) -> {
-                            try {
-                                queue.put(l);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        });
+                    try {
+                        queue.put(l);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+
     }
 }

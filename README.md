@@ -9,3 +9,9 @@ however I find it too restrictive and hard to scale.
 
 We carefully monitor the amount of memory used while at the same time doing a fast injestion of the data and concurrently
 processing each line.
+
+
+javac -classpath $HOME/Google\ Drive/code  FileProcessorDriver.java
+
+java -classpath $HOME/Google\ Drive/code \
+concurrency.fileprocessing.FileProcessorDriver /Users/barringtonhenry/Documents/samples/star2002-full.csv
